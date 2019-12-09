@@ -1,4 +1,4 @@
-yum groupinstall "GNOME Desktop" -y
+#yum groupinstall "GNOME Desktop" -y
 
 yum groupinstall "Server with GUI"
 
