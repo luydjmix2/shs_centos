@@ -1,17 +1,16 @@
+function preflight_check() {
+  echo -n "[preflight] checking $1"
+  if [[ $2 -eq 0 ]]; then
+    echo " ... PASSED"
+    exit 1
+  fi
+}
 yum groupinstall "GNOME Desktop" -y
-read var1
-echo "Yes = Y"
-if [ "$var1" == "Y" ]; then
+preflight_check "ejecute sentencia" $? "se necesita ejecutar la sentencia para continuar"
 yum groupinstall "Server with GUI"
-fi
-echo "Yes = Y"
-read var2
-if [ "$var2" == "Y" ]; then
+preflight_check "ejecute sentencia" $? "se necesita ejecutar la sentencia para continuar"
 unlink /etc/systemd/system/default.target
-fi
-echo "Yes = Y"
-read var3
-if [ "$var3" == "Y" ]; then
+preflight_check "ejecute sentencia" $? "se necesita ejecutar la sentencia para continuar"
 ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
-fi
+preflight_check "ejecute sentencia" $? "se necesita ejecutar la sentencia para continuar"
 echo "ejecute el comando 'reboot'"
